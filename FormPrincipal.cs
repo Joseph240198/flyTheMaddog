@@ -120,6 +120,20 @@ namespace MaddogSimGUI
             NOSE_WHEEL_STEERING_LIMIT_SET
 
         }
+        protected override void DefWndProc(ref Message m)
+        {
+            if (m.Msg == WM_USER_SIMCONNECT)
+            {
+                if (simconnect != null)
+                {
+                    simconnect.ReceiveMessage();
+                }
+            }
+            else
+            {
+                base.DefWndProc(ref m);
+            }
+        }
 
         #endregion
 
