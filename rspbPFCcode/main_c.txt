@@ -17,13 +17,10 @@
 #define ADC2		0	
 // RTD test part	
 #define	RTD			0		
-
 #define REF			5.00		//Modify according to actual voltage
 								//external AVDD and AVSS(Default), or internal 2.5V
 								
 #define ADC1_SPS            ADS1263_2400SPS //rate de samples per second
-
-
 #define landingGearSwitch 20
 
 #define COLOR_BOLD_GREEN	"\033[1;32m"
@@ -72,7 +69,6 @@ void pipeHandler(int signum)
 	lostConnection = 1;
 	closeConnection(new_socket);
 }
-
 
 int main(void)
 {
@@ -166,7 +162,6 @@ int main(void)
 		printf(COLOR_GREEN "Socket created\r\n" COLOR_OFF);
 		printf("Port: " COLOR_GREEN "%hu\r\n" COLOR_OFF, portNum);
 	}
-
 	if (!bcm2835_init())
 	{
 		return 1;
@@ -182,7 +177,6 @@ int main(void)
 	double voltage[10];
 	char str2send[100] = "";
 	char auxStr[20] = "";
-	
 	
 	while(1) {
 		
@@ -287,8 +281,6 @@ int main(void)
 			}
 	}
 	
-
-
 	 if(ADC1_RATE) {
 		printf("TEST_ADC1_RATE\r\n");
 		struct timespec start={0, 0}, finish={0, 0}; 
@@ -303,7 +295,6 @@ int main(void)
 			time =  (double)(finish.tv_sec-start.tv_sec)*1000.0 + (double)(finish.tv_nsec-start.tv_nsec)/1000000.0;
 			printf("%lf ms\r\n", time);
 			printf("single channel %lf kHz\r\n", 10000 / time);
-
 		}
 		else {
 			for(i=0; i<1000; i++) {
@@ -314,7 +305,6 @@ int main(void)
 			printf("%lf ms\r\n", time);
 			printf("multi channel %lf kHz\r\n", 10000 / time);
 		}
-
 	}
 	else if(RTD) {
 		printf("TEST_RTD\r\n");
@@ -325,6 +315,5 @@ int main(void)
 		printf("Temp is %lf \r\n", TEMP);
 		printf("\33[2A");//Move the cursor up
 	}
-
 	return 0;
 }
