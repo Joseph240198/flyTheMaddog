@@ -1,0 +1,15 @@
+#!/bin/bash -e
+# Wait to make sure graphical environment is ready
+sleep 5
+echo "Permitiendo acceso a root al servidor X"
+#Allow root to access X server
+xhost +SI:localuser:root
+echo "Estableciendo variables de entorno"
+#Set environment variables
+export DISPLAY=:0
+export XAUTHORITY=/home/pi/.Xauthority
+echo "ejecutando terminal"
+#execute program in lxterminal
+sudo /usr/bin/lxterminal --geometry=120x60  -e /home/pi/Desktop/AD_HAT/c/main
+echo "Fin script"
+exit 0
